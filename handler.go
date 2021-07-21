@@ -143,12 +143,13 @@ func (s *WsHandler) CheckIsOnline(userId string) (bool, error) {
 	return r.Data.Result, nil
 }
 
-func (s *WsHandler) SendMsg(userIds, messages []string) (bool, error) {
+func (s *WsHandler) SendMsg(userIds, messages, clientIds []string) (bool, error) {
 	reqUrl := fmt.Sprintf("%s/api/send-msg", s.BaseUrl)
 	method := "POST"
 	params := map[string]interface{}{
-		"user_id_list": userIds,
-		"msg_list":     messages,
+		"user_id_list":   userIds,
+		"msg_list":       messages,
+		"client_id_list": clientIds,
 	}
 	status, content, _, err := wget.PostJson(reqUrl, method, params, nil)
 	if err != nil {
