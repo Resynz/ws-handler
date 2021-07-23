@@ -15,7 +15,7 @@ type WsHandler struct {
 	BaseUrl string `json:"base_url"`
 }
 
-type baseRes struct {
+type BaseRes struct {
 	Code    int    `json:"code"`
 	Message string `json:"message"`
 }
@@ -32,7 +32,7 @@ func (s *WsHandler) GetWsUrl(userId string) (string, error) {
 	}
 
 	type res struct {
-		*baseRes
+		*BaseRes
 		Data struct {
 			WsUrl string `json:"ws_url"`
 		} `json:"data"`
@@ -60,7 +60,7 @@ func (s *WsHandler) GetOnlineCount() (int64, error) {
 	}
 
 	type res struct {
-		*baseRes
+		*BaseRes
 		Data struct {
 			Count int64 `json:"count"`
 		} `json:"data"`
@@ -99,7 +99,7 @@ func (s *WsHandler) GetUserInfo(userId string) (*UserInfo, error) {
 	}
 
 	type res struct {
-		*baseRes
+		*BaseRes
 		Data struct {
 			Info *UserInfo `json:"info"`
 		} `json:"data"`
@@ -127,7 +127,7 @@ func (s *WsHandler) CheckIsOnline(userId string) (bool, error) {
 	}
 
 	type res struct {
-		*baseRes
+		*BaseRes
 		Data struct {
 			Result bool `json:"result"`
 		} `json:"data"`
@@ -159,7 +159,7 @@ func (s *WsHandler) SendMsg(userIds, messages, clientIds []string) (bool, error)
 		return false, fmt.Errorf("bad http status:%d", status)
 	}
 	type res struct {
-		*baseRes
+		*BaseRes
 		Data struct {
 			Result bool `json:"result"`
 		} `json:"data"`
@@ -189,7 +189,7 @@ func (s *WsHandler) Broadcast(messages []string) (bool, error) {
 		return false, fmt.Errorf("bad http status:%d", status)
 	}
 	type res struct {
-		*baseRes
+		*BaseRes
 		Data struct {
 			Result bool `json:"result"`
 		} `json:"data"`
